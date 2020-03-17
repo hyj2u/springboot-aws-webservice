@@ -1,5 +1,6 @@
 package com.web.toyproject.springboot.web;
 
+import com.web.toyproject.springboot.config.auth.dto.SessionUser;
 import com.web.toyproject.springboot.service.posts.PostsService;
 import com.web.toyproject.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -8,13 +9,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequiredArgsConstructor
 public class IndexController {
     private final PostsService postsService;
+    private final HttpSession httpSession;
     @GetMapping("/")
     public String index(Model model){
         model.addAttribute("posts", postsService.findAllDesc());
+        SessionUser user = (SessionUser)httpSession.getAttribute("user");
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
         return "index";
     }
     @GetMapping("/posts/save")
