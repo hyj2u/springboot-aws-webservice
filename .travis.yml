@@ -19,9 +19,9 @@ notifications:
       - hyj2u94@gmail.com
 
 before_deploy:
-  - zip -r aws-springboot2-webservice *
+  - zip -r aws-springboot-webservice *
   - mkdir -p deploy
-  - mv aws-springboot2-webservice.zip deploy/aws-springboot2-webservice.zip
+  - mv aws-springboot-webservice.zip deploy/aws-springboot2-webservice.zip
 
 deploy:
   -provider: s3
