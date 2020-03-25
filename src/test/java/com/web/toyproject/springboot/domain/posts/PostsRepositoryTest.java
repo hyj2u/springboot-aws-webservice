@@ -41,9 +41,9 @@ public class PostsRepositoryTest {
         postsRepository.save(Posts.builder().title("title").content("content").author("author").build());
         List<Posts> postsList = postsRepository.findAll();
         Posts posts =postsList.get(0);
-        System.out.println("createDate="+posts.getCreatedDate()+", modifiedDate="+posts.getModifiedDate());
+        System.out.println("createDate="+posts.getCreated_Date()+", modifiedDate="+posts.getModified_Date());
 
-        Assertions.assertThat(posts.getCreatedDate()).isAfter(now);
-        Assertions.assertThat(posts.getModifiedDate()).isAfter(now);
+        Assertions.assertThat(posts.getCreated_Date()).isAfter(now);
+        Assertions.assertThat(posts.getModified_Date()).isAfter(now);
     }
 }
