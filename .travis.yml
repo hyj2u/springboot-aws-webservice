@@ -17,3 +17,19 @@ notifications:
   email:
     recipients:
       - hyj2u94@gmail.com
+
+before_deploy:
+  - zip -r aws-springboot2-webservice *
+  - mkdir -p deploy
+  - mv aws-springboot2-webservice.zip deploy/aws-springboot2-webservice.zip
+
+deploy:
+  -provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: aws-springboot-build
+  region: ap-northeatst-2
+  skip_cleanup: true
+  acl: private
+  local_dir: deploy
+  wait-until-deployed : true
